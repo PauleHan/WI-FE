@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-long-grid',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 
 export class LongGridComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { 
+    this.route.params.subscribe(res => console.log(res.id));
+  }
 
   ngOnInit() {
+    
   }
 
 }
