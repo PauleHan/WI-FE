@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LongGridComponent } from './long-grid/long-grid.component';
 import { PostsBoardComponent } from './posts-board/posts-board.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { BlockSidebarComponent } from './block-sidebar/block-sidebar.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     AppComponent,
     LongGridComponent,
     PostsBoardComponent,
-    SignInComponent
+    SignInComponent,
+    BlockSidebarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
