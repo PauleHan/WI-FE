@@ -1,46 +1,55 @@
-<header class="kotha-menu marketing-menu left-logo">
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container">
-		  <h1>
-		  	<a class="navbar-brand" routerLink="">
-		  		<img src="assets/images/logo_wiki_investigation.svg" alt="WIKI-Investigation">
-		  	</a>
-		  </h1>
-		  
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  
-		  <div class="collapse navbar-collapse" id="navbarNav">
-		  
-		    <ul class="navbar-nav text-uppercase">
-		      <li class="nav-item" routerLinkActive="active">
-		        <a class="nav-link" routerLink="">Головна</a>
-		      </li>
-		      <li class="nav-item" routerLinkActive="active">
-		        <a class="nav-link" routerLink="login">Вхід</a>
-		      </li>
-		    </ul>
-		    
-			<!--<ul class="navbar-nav top-social-icons pull-right">
-				<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-				<li class="top-search">
-					<a href="#" class="sactive">
-						<i class="fa fa-search"></i>
-					</a>
-				</li>
-			</ul>-->
-
-		    <div class="show-search">
-				<form role="search" method="get" id="searchform" action="#">
-					<input class="form-control mr-sm-2" type="text" placeholder="Search and hit enter..." aria-label="Search" name="s" id="s">
-				</form>
-			</div>
-
+<!-- Navbar-->
+<!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
+<header class="navbar navbar-sticky">
+      <!-- Search-->
+      <form class="site-search" method="get">
+        <input type="text" name="site_search" placeholder="Type to search...">
+        <div class="search-tools"><span class="clear-search">Clear</span><span class="close-search"><i class="icon-cross"></i></span></div>
+      </form>
+      <div class="site-branding">
+        <div class="inner">
+          <!-- Off-Canvas Toggle (#shop-categories)--><a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
+          <!-- Off-Canvas Toggle (#mobile-menu)--><a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
+          <!-- Site Logo--><a class="site-logo" routerLink=""><img src="../assets/img/logo/logo_wik.svg" alt="WIKI-Investigation"></a>
+        </div>
+      </div>
+      <!-- Main Navigation-->
+      <nav class="site-menu">
+        <ul>
+        	<li>
+        		<a routerLink="" routerLinkActive="active"><span>Головна</span></a>
+        	</li>
+        	<li>
+        		<a routerLink="login" routerLinkActive="active"><span>Вхід</span></a>
+        	</li>
+        </ul>
+      </nav>
+      
+<!-- Toolbar-->
+	<div class="toolbar">
+		<div class="inner">
+		  <div class="tools">
+		    <div class="search"><i class="icon-search"></i></div>
+		    <div class="account"><a href="account-orders.html"></a><i class="icon-head"></i>
+		      <ul class="toolbar-dropdown">
+		        <li class="sub-menu-user">
+		          <div class="user-ava"><img src="img/account/user-ava-sm.jpg" alt="Daniel Adams">
+		          </div>
+		          <div class="user-info">
+		            <h6 class="user-name">Daniel Adams</h6><span class="text-xs text-muted">290 Reward points</span>
+		          </div>
+		        </li>
+		          <li><a href="account-profile.html">My Profile</a></li>
+		          <li><a href="account-orders.html">Orders List</a></li>
+		          <li><a href="account-wishlist.html">Wishlist</a></li>
+		        <li class="sub-menu-separator"></li>
+		        <li><a href="#"> <i class="icon-unlock"></i>Logout</a></li>
+		      </ul>
+		    </div>
 		  </div>
 		</div>
-	</nav>
+	</div>
+      
 </header>
-
 
 <router-outlet></router-outlet>
