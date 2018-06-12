@@ -98,7 +98,10 @@ button:focus { outline: none; }
 .btn-warning,
 .btn-danger {
   color: $white-color;
-  &:hover, &:active, &:focus { color: $white-color; }
+  &:hover, &:active, &:focus { 
+    color: $white-color;
+    border-color: transparent;
+  }
 }
 .btn-primary { @include button-variant($brand-primary); }
 .btn-success { @include button-variant($brand-success); }
