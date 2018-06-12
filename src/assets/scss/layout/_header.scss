@@ -370,6 +370,13 @@
   right: 30px;
   height: 100%;
   z-index: 5;
+  padding-right: 60px;
+  @media (max-width: $screen-md) {
+    padding-right: 20px;
+  }
+  @media (max-width: $screen-sm) {
+    padding-right: 0px;
+  }
   .inner {
     display: table;
     height: 100%;
