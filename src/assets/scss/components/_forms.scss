@@ -59,6 +59,12 @@ select.form-control {
 // Form group
 .form-group {
   margin-bottom: floor($grid-vertical-step / 1.2) !important; //~20px
+  .form-control {
+    width: 100%;
+  }
+  .form-control:not(:first-child) {
+    border-radius: ceil($input-height / 2);
+  }
   label {
     margin-bottom: 8px;
     padding-left: 18px;
@@ -186,7 +192,11 @@ select.form-control.form-control-sm {
   }
   .form-control {
     padding-left: 35px;
+    width: 100%;
     &:focus ~ .input-group-addon { color: $brand-primary; }
+  }
+  .form-control:not(:last-child) {
+    border-radius: ceil($input-height / 2);
   }
   .input-group-btn {
     right: 10px;
