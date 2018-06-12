@@ -61,6 +61,7 @@ select.form-control {
   margin-bottom: floor($grid-vertical-step / 1.2) !important; //~20px
   .form-control {
     width: 100%;
+    position: initial;
   }
   .form-control:not(:first-child) {
     border-radius: ceil($input-height / 2);
