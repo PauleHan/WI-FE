@@ -11,6 +11,8 @@ import { PostsBoardComponent } from './posts-board/posts-board.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BlockSidebarComponent } from './block-sidebar/block-sidebar.component';
 import { HeaderComponent } from './header/header.component';
+import { ToolbarComponent } from './header/toolbar/toolbar.component';
+import { NavbarComponent } from './header/navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { HeaderComponent } from './header/header.component';
     PostsBoardComponent,
     SignInComponent,
     BlockSidebarComponent,
-    HeaderComponent
+    HeaderComponent,
+    ToolbarComponent,
+    NavbarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
