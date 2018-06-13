@@ -1,57 +1,5 @@
-<!-- Navbar-->
-<!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
 <header class="navbar navbar-sticky">
-      <!-- Search-->
-      <form class="site-search" method="get">
-        <input type="text" name="site_search" placeholder="Type to search...">
-        <div class="search-tools"><span class="clear-search">Clear</span><span class="close-search"><i class="icon-cross"></i></span></div>
-      </form>
-      <div class="site-branding">
-        <div class="inner">
-          <!-- Off-Canvas Toggle (#shop-categories)--><a class="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
-          <!-- Off-Canvas Toggle (#mobile-menu)--><a class="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
-          <!-- Site Logo--><a class="site-logo" routerLink=""><img src="assets/img/logo/logo_wik.svg" alt="WIKI-Investigation"></a>
-        </div>
-      </div>
-      <!-- Main Navigation-->
-      <nav class="site-menu">
-        <ul>
-        	<li>
-        		<a routerLink="" routerLinkActive="active"><span>Головна</span></a>
-        	</li>
-        	<li>
-        		<a routerLink="login" routerLinkActive="active"><span>Вхід</span></a>
-        	</li>
-        </ul>
-      </nav>
-      
-<!-- Toolbar-->
-	<div class="toolbar">
-		<div class="inner">
-		  <div class="tools">
-		    <div class="search"><i class="icon-search"></i></div>
-		    <div class="account">
-		    
-		    	<a href="#"></a><i class="icon-head"></i>
-		    	
-		      <ul class="toolbar-dropdown">
-		        <li class="sub-menu-user">
-		          <div class="user-ava"><img src="assets/img/account/Roman_Yakovlev.webp" alt="Роман Яковлєв">
-		          </div>
-		          <div class="user-info">
-		            <h6 class="user-name">Роман Яковлєв</h6><span class="text-xs text-muted">8 рослідувань</span>
-		          </div>
-		        </li>
-		          <li><a href="#">Мій профіль</a></li>
-		          <li><a href="#">Рослідування</a></li>
-		        <li class="sub-menu-separator"></li>
-		        <li><a href="#"> <i class="icon-unlock"></i>Вихід</a></li>
-		      </ul>
-		    </div>
-		  </div>
-		</div>
-	</div>
-      
+	<app-header></app-header>
 </header>
 
 <router-outlet></router-outlet>
