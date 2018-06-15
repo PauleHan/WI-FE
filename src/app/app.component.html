@@ -2,4 +2,21 @@
 	<app-header></app-header>
 </header>
 
-<router-outlet></router-outlet>
+<!-- Off-Canvas Wrapper-->
+<div class="offcanvas-wrapper">
+	
+	<!-- Page Content-->
+	<router-outlet></router-outlet> 
+
+	<!-- Site Footer-->
+    <footer class="site-footer">
+        <app-footer></app-footer>
+    </footer>
+    
+</div>
+
+<!-- Back To Top Button-->
+<a class="scroll-to-top-btn" href="#"><i class="icon-arrow-up"></i></a>
+
+<!-- Backdrop-->
+<div class="site-backdrop"></div>
