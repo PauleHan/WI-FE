@@ -13,6 +13,7 @@ import { BlockSidebarComponent } from './block-sidebar/block-sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { ToolbarComponent } from './header/toolbar/toolbar.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { NavbarComponent } from './header/navbar/navbar.component';
     BlockSidebarComponent,
     HeaderComponent,
     ToolbarComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
