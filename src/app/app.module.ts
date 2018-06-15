@@ -18,6 +18,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { ArticleItemComponent } from './articles/article-item/article-item.component';
 import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { ArticleEditComponent } from './articles/article-edit/article-edit.compo
     ArticlesComponent,
     ArticleItemComponent,
     ArticleDescComponent,
-    ArticleEditComponent
+    ArticleEditComponent,
+    SidebarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
