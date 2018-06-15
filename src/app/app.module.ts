@@ -14,6 +14,10 @@ import { HeaderComponent } from './header/header.component';
 import { ToolbarComponent } from './header/toolbar/toolbar.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { ArticleItemComponent } from './articles/article-item/article-item.component';
+import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
+import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 
 @NgModule({
   imports: [
@@ -31,7 +35,11 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     ToolbarComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    ArticlesComponent,
+    ArticleItemComponent,
+    ArticleDescComponent,
+    ArticleEditComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
