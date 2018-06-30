@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { ArticleAddComponent } from './articles/article-add/article-add.component';
 import { ArticleItemComponent } from './articles/article-item/article-item.component';
 import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
@@ -43,6 +44,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
         SignInComponent,
         SignUpComponent,
         ArticlesComponent,
+        ArticleAddComponent,
         ArticleItemComponent,
         ArticleDescComponent,
         ArticleEditComponent,

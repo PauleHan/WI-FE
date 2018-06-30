@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
+import { ArticleAddComponent } from './articles/article-add/article-add.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
@@ -20,7 +21,11 @@ const routes: Routes = [
         component: ArticleDescComponent
     },
     {
-        path: 'long-grid-edit/:id',
+        path: 'long-grid-add',
+        component: ArticleAddComponent
+    },
+    {
+        path: 'long-grid/edit/:id',
         component: ArticleEditComponent
     },
     {
