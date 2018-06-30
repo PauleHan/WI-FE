@@ -3,15 +3,15 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"start": "concurrently --kill-others \"npm run server:run\" \"ng serve --host $IP --port $PORT --public-host wiki-investigation-paulehan.c9users.io --aot --progress=false --proxy-config proxy.conf.json\"",
+		"start": "concurrently --kill-others \"yarn run server:run\" \"ng serve --host $IP --port $PORT --public-host wiki-investigation-paulehan.c9users.io --aot --progress=false --proxy-config proxy.conf.json\"",
 		"lint:client": "ng lint",
 		"lint:server": "tslint './server/**/*.ts' -c ./server/tslint.json --fix",
 		"test:client": "ng test --watch false",
 		"e2e:client": "ng e2e",
-		"build": "ng build --prod --aot --output-path=dist/client && npm run server:build",
+		"build": "ng build --prod --aot --output-path=dist/client && yarn run server:build",
 		"server:run": "nodemon",
 		"server:build": "tsc -p ./server",
-		"postinstall": "npm run build"
+		"postinstall": "yarn run build"
 	},
 	"private": true,
 	"dependencies": {
@@ -25,7 +25,7 @@
 		"@angular/platform-browser-dynamic": "^6.0.2",
 		"@angular/router": "^6.0.2",
 		"@ng-bootstrap/ng-bootstrap": "^2.0.0",
-		"axios": "^0.18.0",
+		"@types/es6-promise": "^3.3.0",
 		"body-parser": "^1.18.3",
 		"bootstrap": "4.0.0",
 		"core-js": "^2.5.4",
@@ -37,6 +37,7 @@
 		"ngx-editor": "^3.3.0",
 		"rxjs": "^6.0.0",
 		"rxjs-compat": "^6.2.1",
+		"typed-rest-client": "^1.0.7",
 		"zone.js": "^0.8.26"
 	},
 	"devDependencies": {
