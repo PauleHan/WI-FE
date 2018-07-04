@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"scripts": {
 		"ng": "ng",
-		"start": "concurrently --kill-others \"yarn run server:run\" \"ng serve --host $IP --port $PORT --public-host wiki-investigation-paulehan.c9users.io --aot --progress=false --proxy-config proxy.conf.json\"",
+		"start": "concurrently -r -k \"yarn run server:run\" \"ng serve --host $IP --port $PORT --public-host wiki-investigation-paulehan.c9users.io --aot --progress=false --proxy-config proxy.conf.json\"",
 		"lint:client": "ng lint",
 		"lint:server": "tslint './server/**/*.ts' -c ./server/tslint.json --fix",
 		"test:client": "ng test --watch false",
@@ -35,9 +35,11 @@
 		"ng-bootstrap": "^1.6.3",
 		"ngx-bootstrap": "^3.0.0",
 		"ngx-editor": "^3.3.0",
+		"remove-markdown": "^0.3.0",
+		"request": "^2.87.0",
+		"request-promise-native": "^1.0.5",
 		"rxjs": "^6.0.0",
 		"rxjs-compat": "^6.2.1",
-		"typed-rest-client": "^1.0.7",
 		"zone.js": "^0.8.26"
 	},
 	"devDependencies": {
