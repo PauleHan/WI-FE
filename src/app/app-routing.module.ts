@@ -17,7 +17,7 @@ const routes: Routes = [
         component: ArticlesComponent
     },
     {
-        path: 'long-grid/:id',
+        path: 'long-grid/:author/:permlink',
         component: ArticleDescComponent
     },
     {
