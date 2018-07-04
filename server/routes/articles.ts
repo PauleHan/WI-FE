@@ -1,56 +1,84 @@
 import { Request, Response, Router } from "express";
+import * as removeMD from "remove-markdown";
+import * as rp from "request-promise-native";
 
 const articlesRouter: Router = Router();
 
-const articles = [
-    {
-        "id": 1,
-        "title": "Test Article #1",
-        "mainImage": "01.jpg",
-        "tags": [
-            "test",
-            "article"
-        ],
-        "user": {
-            "id": 1,
-            "name": "Roman Yakovliev"
-        },
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem.<br/><br/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam.<br/><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem."
-    },
-    {
-        "id": 2,
-        "title": "Test Article #2",
-        "mainImage": "02.jpg",
-        "tags": [
-            "lololo",
-            "article",
-            "test"
-        ],
-        "user": {
-            "id": 1,
-            "name": "Roman Yakovliev"
-        },
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem.<br/><br/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam.<br/><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem."
-    },
-    {
-        "id": 3,
-        "title": "Test Article #3",
-        "mainImage": "01.jpg",
-        "tags": [
-            "uhooo",
-            "article"
-        ],
-        "user": {
-            "id": 1,
-            "name": "Roman Yakovliev"
-        },
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem.<br/><br/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam.<br/><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem."
-    }
-];
-
 articlesRouter.get("/", (request: Request, response: Response) => {
     
-    response.json(articles);
+    // let baseUrl: string = 'https://jsonplaceholder.typicode.com';
+    // let baseUrl: string = 'https://httpbin.org/post';
+    const baseUrl: string = 'https://api.steemit.com';
+    const options = {
+        method: 'POST',
+        uri: baseUrl,
+        body: {
+            jsonrpc: "2.0", 
+            method: "get_discussions_by_hot", 
+            params: [{limit: 10, tag: "life"}],
+            id: 323
+        },
+        json: true
+    };
+    
+    function strip_html_tags(str)
+    {
+        if ((str === null) || (str === '')) {
+            return false;
+        }
+        else {
+            str = str.toString();
+        }
+        return str.replace(/<[^>]*>/g, '');
+    }
+    
+    async function getArticles () {  
+        try {
+            let data = await rp.post(options);
+
+            let res = Array();
+            
+            interface resItem {
+                id: number;
+                author: string;
+                permlink: string;
+                category: string;
+                last_update: string;
+                title: string;
+                body: string;
+                tags: any[];
+                image: string;
+            }
+            
+            for (let item of data.result) {
+            
+                let resItem = <resItem>{};
+                
+                resItem.id          = item.id;
+                resItem.author      = item.author;
+                resItem.permlink    = "long-grid/" + item.author + "/" + item.permlink;
+                resItem.category    = item.category;
+                resItem.last_update = item.last_update;
+                resItem.title       = item.title;
+                
+                let body            = removeMD(item.body);
+                resItem.body        = body.substring(0, 140) + " ...";
+                
+                let payload         = JSON.parse(item.json_metadata);
+                resItem.tags        = payload.tags ? payload.tags : null;
+                resItem.image       = payload.image ? payload.image[0] : null;
+                
+                res.push(resItem);
+            }           
+
+            response.json(res);
+        }
+        catch (err) {
+            response.json('Failed: ' + err.message);
+        }
+    }
+    getArticles();
+    
 });
 
 export { articlesRouter };
