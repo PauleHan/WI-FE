@@ -14,7 +14,9 @@ const app: express.Application = express();
 
 app.disable("x-powered-by");
 
-// app.use(cors());
+app.use(cors());
+app.options('*', cors()); // include before other routes
+
 app.use(json());
 app.use(compression());
 app.use(urlencoded({ extended: true }));
