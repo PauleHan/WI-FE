@@ -3,91 +3,46 @@
     
         <!-- Blog Posts-->
         <div class="col-xl-9 col-lg-8 order-lg-2">
+                
+            <article class="row" *ngFor="let article of articles">   
+                <div class="col-md-3 order-md-2">
+                  <ul class="post-meta">
+                    <li><i class="icon-clock"></i><a href="#">&nbsp;{{ article.last_update }}</a></li>
+                    <li><i class="icon-head"></i>&nbsp;{{ article.author }}</li>
+                    <li><i class="icon-tag"></i>
+                        <a href="#" *ngFor="let tag of article.tags">&nbsp;{{ tag }}</a>
+                    </li>
+                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;0 Comments</a></li>
+                  </ul>
+                </div>
+                <div class="col-md-9 order-md-1 blog-post">
+                <h3 class="post-title">
+                    <a routerLink="{{ article.permlink }}">{{ article.title }}</a>
+                </h3>
+                    <a class="post-thumb" routerLink="{{ article.permlink }}">
+                        <img [src]="article.image" alt="{{ article.title }}">
+                    </a>  
+                    <p>{{ article.body }}&nbsp;<a routerLink="{{ article.permlink }}" class='text-medium'>Read More</a>
+                    </p>
+                </div>
+            </article>
             
-              <!-- Post-->
-              <article class="row">
-              
-                <div class="col-md-3 order-md-2">
-                  <ul class="post-meta">
-                    <li><i class="icon-clock"></i><a href="#">&nbsp;Feb 11, 2017</a></li>
-                    <li><i class="icon-head"></i>&nbsp;John Doe</li>
-                    <li><i class="icon-tag"></i><a href="#">&nbsp;Fashion,</a><a href="#">&nbsp;Travel</a></li>
-                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;3 Comments</a></li>
-                  </ul>
-                </div>
-                
-                <div class="col-md-9 order-md-1 blog-post">
-                  <h3 class="post-title"><a routerLink="long-grid/1">High Fashion On The Lake Shore</a></h3>
-                  <a class="post-thumb" routerLink="long-grid/1"><img src="assets/img/blog/01.jpg" alt="Post"></a>  
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque мійaudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo...&nbsp;<a routerLink="long-grid/1" class='text-medium'>Read More</a>
-                  </p>
-                </div>
-                
-              </article>
-              
-              <!-- Post-->
-              <article class="row">
-                <div class="col-md-3 order-md-2">
-                  <ul class="post-meta">
-                    <li><i class="icon-clock"></i><a href="#">&nbsp;Feb 03, 2017</a></li>
-                    <li><i class="icon-head"></i>&nbsp;Susan Mayer</li>
-                    <li><i class="icon-tag"></i><a href="#">&nbsp;Fashion,</a><a href="#">&nbsp;Travel</a></li>
-                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;1 Comment</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-9 order-md-1 blog-post">
-                  <h3 class="post-title"><a routerLink="long-grid/2">Must Have Clothing On Your Next Trip</a></h3>
-                  <p>
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. Aliquid id nobis, amet dolorum earum maxime.</p>
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo... <a routerLink="long-grid/2" class='text-medium'>Read More</a></p>
-                </div>
-              </article>
-              <!-- Post-->
-              <article class="row">
-                <div class="col-md-3 order-md-2">
-                  <ul class="post-meta">
-                    <li><i class="icon-clock"></i><a href="#">&nbsp;Jan 18, 2017</a></li>
-                    <li><i class="icon-head"></i>&nbsp;Mike Jordan</li>
-                    <li><i class="icon-tag"></i><a href="#">&nbsp;Fashion,</a><a href="#">&nbsp;Casual</a></li>
-                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;15 Comments</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-9 order-md-1 blog-post"><a class="post-thumb" href="blog-single-ls.html"><img src="assets/img/blog/02.jpg" alt="Post"></a>
-                  <h3 class="post-title"><a href="blog-single-ls.html">New Trends in Suburban Fashion</a></h3>
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo... <a href='blog-single-ls.html' class='text-medium'>Read More</a></p>
-                </div>
-              </article>
-              <!-- Post-->
-              <article class="row">
-                <div class="col-md-3 order-md-2">
-                  <ul class="post-meta">
-                    <li><i class="icon-clock"></i><a href="blog-single-ls.html">&nbsp;Dec 26, 2016</a></li>
-                    <li><i class="icon-head"></i>&nbsp;Paul Goodrich</li>
-                    <li><i class="icon-tag"></i><a href="#">&nbsp;Fashion</a></li>
-                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;1 Comment</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-9 order-md-1 blog-post">
-                  <h3 class="post-title"><a href="blog-single-ls.html">How To Choose Perfect Summer Suit</a></h3>
-                  <p>
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse. Aliquid id nobis, amet dolorum earum maxime.</p>
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo... <a href='blog-single-ls.html' class='text-medium'>Read More</a></p>
-                </div>
-              </article>
-              <!-- Pagination-->
-              <nav class="pagination">
+            <!-- Pagination-->
+            <nav class="pagination">
                 <div class="column">
-                  <ul class="pages">
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li>...</li>
-                    <li><a href="#">12</a></li>
-                  </ul>
+                    <ul class="pages">
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li>...</li>
+                        <li><a href="#">12</a></li>
+                    </ul>
                 </div>
-                <div class="column text-right hidden-xs-down"><a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="icon-arrow-right"></i></a></div>
-              </nav>
+                <div class="column text-right hidden-xs-down">
+                    <a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="icon-arrow-right"></i></a>
+                </div>
+            </nav>
         </div>
         
         <!-- Sidebar-->
