@@ -1,29 +1,94 @@
 import { Request, Response, Router } from "express";
+import * as removeMD from "remove-markdown";
+import * as rp from "request-promise-native";
 
 const articleRouter: Router = Router();
 
-const article = {
-    "id": 1,
-    "title": "Test Article #1",
-    "mainImage": "01.jpg",
-    "tags": [
-        "test",
-        "article"
-    ],
-    "user": {
-        "id": 1,
-        "name": "Roman Yakovliev"
-    },
-    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem.<br/><br/>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam.<br/><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Ut enim ad minima veniam, quis nostrum exercitationem."
-};
+// GET Article
+articleRouter.get("/:author/:permlink", (request: Request, response: Response) => {
 
-articleRouter.get("/:id", (request: Request, response: Response) => {
+    const author = request.params.author;
+    const permlink = request.params.permlink;
+      
+    // let baseUrl: string = 'https://jsonplaceholder.typicode.com';
+    // let baseUrl: string = 'https://httpbin.org/post';
+    const baseUrl: string = 'https://api.steemit.com';
     
-    const id = request.params.id;
+    const options = {
+        method: 'POST',
+        uri: baseUrl, 
+        body: {
+            jsonrpc: "2.0", 
+            method: "get_content", 
+            params: [
+                author, permlink
+            ],
+            id: 323
+        },
+        json: true
+    };
     
-    console.log(id);
+    function strip_html_tags(str)
+    {
+        if ((str === null) || (str === '')) {
+            return false;
+        }
+        else {
+            str = str.toString();
+        }
+        return str.replace(/<[^>]*>/g, '');
+    }
     
-    response.json(article);
+    async function getArticle () {  
+        try {
+            let data = await rp.post(options);
+            let res = Array();
+            
+            
+            interface resItem {
+                id: number;
+                author: string;
+                permlink: string;
+                category: string;
+                last_update: string;
+                title: string;
+                body: string;
+                tags: any[];
+                image: string;
+            }
+            
+            let item = data.result;
+            let resItem = <resItem>{};;
+            
+            resItem.id          = item.id;
+            resItem.author      = item.author;
+            resItem.permlink    = "long-grid/" + item.author + "/" + item.permlink;
+            resItem.category    = item.category;
+            resItem.last_update = item.last_update;
+            resItem.title       = item.title;
+            
+            resItem.body        = removeMD(item.body);
+            
+            let payload         = JSON.parse(item.json_metadata);
+            resItem.tags        = payload.tags ? payload.tags : null;
+            resItem.image       = payload.image ? payload.image[0] : null;       
+
+            response.json(resItem);
+        }
+        catch (err) {
+            response.json('Failed: ' + err.message);
+        }
+    }
+    getArticle();
+    
+});
+
+// POST Article
+articleRouter.post("/", (request: Request, response: Response) => {
+    
+    console.log(request.body);
+    
+    response.json(request.body);
 });
 
 export { articleRouter };
