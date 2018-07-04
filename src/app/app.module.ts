@@ -15,9 +15,11 @@ import { FooterComponent } from './footer/footer.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { ArticlesService } from './articles/articles.service';
 import { ArticleAddComponent } from './articles/article-add/article-add.component';
 import { ArticleItemComponent } from './articles/article-item/article-item.component';
 import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
+import { ArticleService } from './articles/article-desc/article.service';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -52,7 +54,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
         NotFoundPageComponent,
         SearchResultsComponent
     ],
-    providers: [],
+    providers: [ArticlesService, ArticleService],
     bootstrap: [AppComponent]
 })
 
