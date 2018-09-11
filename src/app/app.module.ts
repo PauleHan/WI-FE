@@ -3,8 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ImageUploadModule } from "angular2-image-upload";
 import { CollapseModule } from 'ngx-bootstrap';
 import { NgxEditorModule } from 'ngx-editor';
+// import { FileUploadModule } from 'ng2-file-upload';
+// import { LMarkdownEditorModule } from 'ngx-markdown-editor';
+// import { MarkdownToHtmlModule } from 'ng2-markdown-to-html';
+import { MarkdownModule } from 'ngx-markdown';
 import { SocialLoginModule, AuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from 'angularx-social-login';
 
@@ -32,20 +37,25 @@ import { ArticleItemComponent } from './articles/article-item/article-item.compo
 import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
 import { ArticleService } from './articles/article-desc/article.service';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
+import { GeoService } from './articles/geo.service';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { RecoveryComponent } from './user/recovery/recovery.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { CrowdAddComponent } from './articles/crowd-add/crowd-add.component';
 
 let config = new AuthServiceConfig([
 	{
 		id: GoogleLoginProvider.PROVIDER_ID,
 		provider: new GoogleLoginProvider(environment.googleClientID)
+	},
+	{
+		id: FacebookLoginProvider.PROVIDER_ID,
+		provider: new FacebookLoginProvider(environment.facebookClientID)
 	}
-	// {
-	//   id: FacebookLoginProvider.PROVIDER_ID,
-	//   provider: new FacebookLoginProvider("Facebook-App-Id")
-	// }
 ]);
 
 export function provideConfig() {
@@ -61,7 +71,12 @@ export function provideConfig() {
 		AppRoutingModule,
 		CollapseModule.forRoot(),
 		NgxEditorModule,
-		SocialLoginModule
+		// LMarkdownEditorModule,
+		// MarkdownToHtmlModule.forRoot(),
+		MarkdownModule.forRoot(),
+		SocialLoginModule,
+		// FileUploadModule
+		ImageUploadModule.forRoot()
 	],
 	declarations: [
 		AppComponent,
@@ -80,13 +95,18 @@ export function provideConfig() {
 		ArticleEditComponent,
 		SidebarComponent,
 		NotFoundPageComponent,
-		SearchResultsComponent
+		SearchResultsComponent,
+		RecoveryComponent,
+		WelcomeComponent,
+		FaqComponent,
+		CrowdAddComponent
 	],
 	providers: [
 		ArticlesService,
 		ArticleService,
 		UserService,
 		AuthGuardService,
+		GeoService,
 		{ provide: AuthServiceConfig, useFactory: provideConfig }
 	],
 	bootstrap: [AppComponent]

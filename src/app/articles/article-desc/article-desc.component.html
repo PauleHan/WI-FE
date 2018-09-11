@@ -1,60 +1,90 @@
 <div class="container padding-bottom-3x padding-top-3x mb-2">
 	<div class="row">
-
+		
 		<!-- Content-->
 		<div class="col-xl-9 col-lg-8 order-lg-2">
 		
-			<!-- Post-->
-			<div class="single-post-meta">
-				<div class="column">
-					<div class="meta-link"><span>by</span>{{ article.author }}</div>
-					<div class="meta-link"><span>in</span>
-						<a href="#">{{ article.category }}</a>
+			<ng-template [ngIf]="article">
+			
+				<!-- Post-->
+				<div class="single-post-meta">
+					<div class="column">
+						<div class="meta-link"><span>Автор</span>{{ article.user[0] ? article.user[0].username : 'Анонім' }}</div>
+						<div *ngIf="article.crowd !== true" class="meta-link"><span>для сфери</span><a href="#">{{ article.articletypes.name }}</a></div>
+					</div>
+					<div class="column">
+						<div class="meta-link"><a href="#"><i class="icon-clock"></i>{{ article.updatedAt | date:"d-LLL-yyyy HH:mm"}}</a></div>
+						<div class="meta-link">
+							<a class="scroll-to" href="#comments"><i class="icon-speech-bubble"></i>0</a></div>
 					</div>
 				</div>
-				<div class="column">
-					<div class="meta-link"><a href="#"><i class="icon-clock"></i>{{ article.last_update }}</a></div>
-					<div class="meta-link">
-						<a class="scroll-to" href="#comments"><i class="icon-speech-bubble"></i>0</a></div>
-				</div>
-			</div>
+					
+				<!--<div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: true, &quot;dots&quot;: true, &quot;loop&quot;: true }">
+					<figure><img src="assets/img/blog/single/01.jpg" alt="Image">
+						<figcaption class="text-white">Image Caption</figcaption>
+					</figure>
+					<figure><img src="assets/img/blog/single/02.jpg" alt="Image">
+						<figcaption class="text-white">Image Caption</figcaption>
+					</figure>
+					<figure><img src="assets/img/blog/single/03.jpg" alt="Image">
+						<figcaption class="text-white">Image Caption</figcaption>
+					</figure>
+				</div>-->
+					
+				<h2 class="padding-top-2x">{{ article.title }}</h2>
+					
+				<a *ngIf="article.media !== null" class="post-thumb" href="long-grid/{{ article.user[0] ? article.user[0].username : 'anonymous' }}/{{ article.id }}">
+					<img src="{{ urlApi }}{{article.media.url}}" alt="{{ article.title }}">
+				</a>
 				
-			<!--<div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: true, &quot;dots&quot;: true, &quot;loop&quot;: true }">
-				<figure><img src="assets/img/blog/single/01.jpg" alt="Image">
-					<figcaption class="text-white">Image Caption</figcaption>
-				</figure>
-				<figure><img src="assets/img/blog/single/02.jpg" alt="Image">
-					<figcaption class="text-white">Image Caption</figcaption>
-				</figure>
-				<figure><img src="assets/img/blog/single/03.jpg" alt="Image">
-					<figcaption class="text-white">Image Caption</figcaption>
-				</figure>
-			</div>-->
+				<a *ngIf="article.crowd === true" class="post-thumb" routerLink="long-grid/{{ article.user[0] ? article.user[0].username : 'anonymous' }}/{{ article.id }}">
+                        <img src="/assets/img/blog/crowd.jpg" alt="{{ article.title }}">
+                </a>
+					
+				<p *ngIf="article.crowd !== true" [innerHTML]="article.body"></p>
+				<p *ngIf="article.crowd === true">{{ article.preview }}</p>
 				
-			<h2 class="padding-top-2x">{{ article.title }}</h2>
-				
-			<a class="post-thumb" href="#"><img [src]="article.image" alt="{{ article.title }}"></a>  
-				
-			<p>{{ article.body }}</p>
+			</ng-template>
 		
-			<div class="single-post-footer">
-				<div class="column">
-					<a class="sp-tag" href="#" *ngFor="let tag of article.tags">#{{ tag }},&nbsp;</a>
-				</div>
+		
+				<div class="single-post-footer">
 				
-				<div class="column">
-					<div class="entry-share"><span class="text-muted">Share post:</span>
-						<div class="share-links"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
+					<ng-template [ngIf]="article">
+						<div class="column">
+							<a class="sp-tag" href="#{{ tag }}" *ngFor="let tag of article.tags">#{{ tag }},&nbsp;</a>
+						</div>
+					</ng-template>
+					
+					<!--<div class="column">
+						<div class="entry-share"><span class="text-muted">Share post:</span>
+							<div class="share-links"><a class="social-button shape-circle sb-facebook" href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="socicon-facebook"></i></a><a class="social-button shape-circle sb-twitter" href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><i class="socicon-twitter"></i></a><a class="social-button shape-circle sb-instagram" href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><i class="socicon-instagram"></i></a><a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a></div>
+						</div>
+					</div>-->
+					
+					<div *ngIf="article && statusAuth" class="column">
+						<button class="btn btn-outline-success" type="button" (click)="likeArticle(article.id, article.likes)">
+							<i class="pe-7s-angle-up"></i>&nbsp;{{ article.likes }}
+						</button>
+						<button class="btn btn-outline-primary" type="button" (click)="dislikeArticle(article.id, article.dislikes)">
+							<i class="pe-7s-angle-down"></i>&nbsp;{{ article.dislikes }}
+						</button>
+					</div>
+					<div *ngIf="article && !statusAuth" class="column">
+						<button class="btn btn-outline-success" type="button" disabled>
+							<i class="pe-7s-angle-up"></i>&nbsp;{{ article.likes }}
+						</button>
+						<button class="btn btn-outline-primary" type="button" disabled>
+							<i class="pe-7s-angle-down"></i>&nbsp;{{ article.dislikes }}
+						</button>
 					</div>
 				</div>
-			</div>
-				
+			
 			<!-- Post Navigation-->
-			<div class="entry-navigation">
+			<!--<div class="entry-navigation">
 				<div class="column text-left"><a class="btn btn-outline-secondary btn-sm" href="#"><i class="icon-arrow-left"></i>&nbsp;Prev</a></div>
 				<div class="column"><a class="btn btn-outline-secondary view-all" href="blog-ls.html" data-toggle="tooltip" data-placement="top" title="All posts"><i class="icon-menu"></i></a></div>
 				<div class="column text-right"><a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="icon-arrow-right"></i></a></div>
-			</div>
+			</div>-->
 				
 				<!-- Relevant Posts-->
 				<!--<h3 class="padding-top-3x padding-bottom-1x">You May Also Like</h3>
@@ -99,11 +129,14 @@
 					</div>
 				</div>-->
 				
-				<!-- Comments-->
+			<!-- Comments-->
+			<ng-template [ngIf]="comments">
 				<section class="padding-top-3x" id="comments">
-					<h3 class="padding-bottom-1x">Comments</h3>
+				
+					<h3 class="padding-bottom-1x">Коментарі</h3>
+					
 					<!-- Comment-->
-					<div class="comment">
+					<!--<div class="comment">
 						<div class="comment-author-ava"><img src="assets/img/reviews/01.jpg" alt="Comment author"></div>
 						<div class="comment-body">
 							<div class="comment-header">
@@ -114,7 +147,7 @@
 								<div class="column"><span class="comment-meta">2 days ago</span></div>
 								<div class="column"><a class="reply-link" href="#"><i class="icon-reply"></i>Reply</a></div>
 							</div>
-							<!-- Comment reply-->
+	
 							<div class="comment comment-reply">
 								<div class="comment-author-ava"><img src="assets/img/reviews/02.jpg" alt="Comment author"></div>
 								<div class="comment-body">
@@ -126,48 +159,79 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>-->
+					
 					<!-- Comment-->
-					<div class="comment">
-						<div class="comment-author-ava"><img src="assets/img/reviews/03.jpg" alt="Comment author"></div>
+					<div class="comment" *ngFor="let comment of comments">
+						<div class="comment-author-ava"><img src="assets/img/account/user-default.png" alt="Comment author"></div>
 						<div class="comment-body">
 							<div class="comment-header">
-								<h4 class="comment-title">Jacob Hammond</h4>
+								<h4 class="comment-title">{{ comment.user[0].username }}:</h4>
 							</div>
-							<p class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+							<p class="comment-text">{{ comment.body }}</p>
 							<div class="comment-footer">
-								<div class="column"><span class="comment-meta">5 days ago</span></div>
-								<div class="column"><a class="reply-link" href="#"><i class="icon-reply"></i>Reply</a></div>
+								<div class="column"><span class="comment-meta">{{ comment.createdAt | date:"d-LLL-yyyy HH:mm"}}</span></div>
+								
+								<div *ngIf="statusAuth" class="column">
+									<button class="btn btn-outline-success" type="button" (click)="likeComment(comment.id, comment.likes)">
+										<i class="pe-7s-angle-up"></i>&nbsp;{{ comment.likes }}
+									</button>
+									<button class="btn btn-outline-primary" type="button" (click)="dislikeComment(comment.id, comment.dislikes)">
+										<i class="pe-7s-angle-down"></i>&nbsp;{{ comment.dislikes }}
+									</button>
+								</div>
+								
+								<div *ngIf="!statusAuth" class="column">
+									<button class="btn btn-outline-success" type="button" disabled>
+										<i class="pe-7s-angle-up"></i>&nbsp;{{ comment.likes }}
+									</button>
+									<button class="btn btn-outline-primary" type="button" disabled>
+										<i class="pe-7s-angle-down"></i>&nbsp;{{ comment.dislikes }}
+									</button>
+								</div>
+								
 							</div>
 						</div>
 					</div>
+					
 				</section>
-				
-				<!-- Comment Form-->
-				<h4 class="padding-top-2x padding-bottom-1x">Leave a Comment</h4>
+			</ng-template>
+			
+			
+			<!-- Comment Form-->
+			<ng-template [ngIf]="statusAuth">
+				<h4 class="padding-top-2x padding-bottom-1x">Залишити коментар</h4>
 				<form class="row" method="post">
-					<div class="col-sm-6">
+					<!--<div class="col-sm-6">
 						<div class="form-group">
 							<label for="comment-name">Name</label>
-							<input class="form-control form-control-rounded" type="text" id="comment-name" placeholder="John Doe" required>
+							<input class="form-control form-control-rounded" type="text" id="comment-name" placeholder="John Doe" name="commentName" [(ngModel)]="comment.name" required>
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label for="comment-email">E-mail</label>
-							<input class="form-control form-control-rounded" type="email" id="comment-email" placeholder="johndoe@email.com" required>
+							<input class="form-control form-control-rounded" type="email" id="comment-email" placeholder="johndoe@email.com" name="commentEmail" [(ngModel)]="comment.email" required>
 						</div>
-					</div>
+					</div>-->
 					<div class="col-12">
 						<div class="form-group">
 							<label for="comment-text">Comment</label>
-							<textarea class="form-control form-control-rounded" rows="7" id="comment-text" placeholder="Write your comment here..." required></textarea>
+							<textarea class="form-control form-control-rounded" rows="7" id="comment-text" placeholder="Ваш коментарь ..." name="commentBody" [(ngModel)]="comment.body" required></textarea>
 						</div>
 					</div>
 					<div class="col-12 text-right">
-						<button class="btn btn-pill btn-primary" type="submit">Post Comment</button>
+						<button class="btn btn-pill btn-primary" type="submit" (click)="sendComment(comment)" [disabled]="!comment.body">Опублікувати</button>
 					</div>
 				</form>
+			</ng-template>
+
+			<div *ngIf="!statusAuth" 
+			class="alert alert-warning alert-dismissible fade show text-center margin-bottom-1x">
+				<span class="alert-close" data-dismiss="alert"></span>
+				<i class="icon-bell"></i>&nbsp;&nbsp;
+				Щоб залишити коментар необхідно <strong><a routerLink="/login">авторизуватися</a></strong>
+			</div>
 		</div>
 
 		<!-- Sidebar -->

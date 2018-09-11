@@ -4,32 +4,85 @@
         <!-- Content-->
         <div class="col-xl-12 col-lg-12 order-lg-1">
             
+            <a routerLink="/long-grid-add">
+                <button class="btn btn-square btn-secondary" type="button">Рослідування</button>
+            </a>
+            <a routerLink="/crowd-add">
+                <button class="btn btn-square btn-secondary" type="button">Крауд</button>
+            </a>
+            
             <h6 class="text-muted text-normal text-uppercase margin-top-1x">Новий лонг-грід</h6>
             <hr class="margin-bottom-1x">
             
             <div class="form-group row">
-                <label class="col-2 col-form-label" for="article-title">Заголовок</label>
+                <label class="col-2 col-form-label" for="article-title">Назва розслідування</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" id="article-title" value="Заголовок лонг-гріду">
+                    <input class="form-control" type="text" id="article-title" 
+                    [placeholder]="'Моє нове розслідування'"
+                    [(ngModel)]="article.title" required>
                 </div>
             </div>
             
             <div class="form-group row">
-                <label class="col-2 col-form-label" for="article-text">Лонг-грід</label>
+                <label class="col-2 col-form-label" for="article-image">Картинка / промо-відео розслідування</label>
+                
                 <div class="col-10">
-                    <app-ngx-editor [placeholder]="'Мій перший лонг-грід ...'" [spellcheck]="true" [(ngModel)]="htmlContent" height="20rem" minHeight="10rem"></app-ngx-editor>
+                    <div class="custom-file">
+                        <input class="custom-file-input" type="file" id="article-image" name="files" (change)="onFileChanged($event)" #fileInput>
+                        <label class="custom-file-label" for="article-image">Виберіть файл...</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-2 col-form-label" for="article-type">Сфера</label>
+                <div class="col-10">
+                    <select class="form-control" id="article-type" [(ngModel)]="article.type">
+                        <option value="" selected>Зробіть вибір</option>
+                        <option value="{{ types.id }}" *ngFor="let types of listTypes">{{ types.name }}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-2 col-form-label" for="article-location">Локація</label>
+                <div class="col-10">
+                    <select class="form-control" id="article-location" [(ngModel)]="article.location">
+                        <option value="" selected>Зробіть вибір</option>
+                        <option value="{{ location.id }}" *ngFor="let location of listLocations">{{ location.name }}</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-2 col-form-label" for="article-preview">Схема корупційного злочину (Гіпотеза)</label>
+                <div class="col-10">
+                    <textarea class="form-control" id="article-preview" rows="5" 
+                    [placeholder]="'Коротко про сам корупційний злочин'"
+                    [(ngModel)]="article.preview"></textarea>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-2 col-form-label" for="article-text">Опис рослідування</label>
+                <div class="col-10">
+                    <!--<p>Для стилізації опису використовуються синтаксис <a href="https://uk.wikipedia.org/wiki/Markdown#Приклади_синтаксису" target="_blank">Markdown</a></p>-->
+                    <!--<textarea class="form-control" [(ngModel)]="article.body" rows="20"></textarea>-->
+                    <app-ngx-editor [placeholder]="'Тут треба описати Ваше рослідування'" [spellcheck]="true" [(ngModel)]="article.body" height="400px" minHeight="300px"></app-ngx-editor>
                 </div>
             </div>
             
             <div class="form-group row">
                 <label class="col-2 col-form-label" for="article-tags">Теги</label>
                 <div class="col-10">
-                    <input class="form-control" type="text" id="article-tags" value="ЛонгГрід, Запис">
+                    <input class="form-control" type="text" id="article-tags" [(ngModel)]="article.tags">
                 </div>
             </div>
 
             <div class="text-center text-sm-center">
-                <button class="btn btn-primary margin-bottom-none" type="submit">Зберегти</button>
+                <button class="btn btn-primary margin-bottom-none" type="submit" 
+                (click)="addArticle(article)" 
+                [disabled]="!article.title || !article.preview || !article.body || !article.type || !article.location">Зберегти</button>
             </div> 
 
         </div>

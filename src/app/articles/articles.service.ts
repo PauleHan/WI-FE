@@ -1,25 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ArticlesService {
     
     constructor(private http: HttpClient) {}
     
-    // storeArticles(articles: any[]) {
-    //     const headers = new Headers({'Content-Type': 'application/json'});
-    //     return this.http.get('https://wiki-investigation-paulehan.c9users.io:8081/api/articles', 
-    //     articles,
-    //     {headers: headers});
-    // }
+    putArticle() {
+        
+        return true;   
+    }
     
-    // getArticles(articles: any[]) {
-    //     return this.http.get('https://wiki-investigation-paulehan.c9users.io:8081/api/articles', 
-    //     articles);
-    // }si
+    setArticle(data: any) {
+        
+        return this.http.post(`${environment.api}/articles`, data);
+    }
     
     getArticles() {
-        const url = 'https://wiki-investigation-paulehan.c9users.io:8081/api';
-        return this.http.get(`${url}/articles`);
+        
+        return this.http.get(`${environment.api}/articles?_sort=createdAt:desc`);
     }
+    
+    getTypes() {
+        
+        return this.http.get(`${environment.api}/articletypes`);
+    }
+    
+    getLocations() {
+        
+        return this.http.get(`${environment.api}/locations`);
+        
+    }
+    
+    setFileUpload(data: any) {
+
+        return this.http.post(`${environment.api}/upload`, data);
+    }
+    
 }

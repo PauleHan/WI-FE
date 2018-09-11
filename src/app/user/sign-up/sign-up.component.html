@@ -1,57 +1,70 @@
 <div class="container padding-bottom-3x padding-top-3x mb-1">
-    <div class="row justify-content-center">
-        <div class="col-xl-6 col-md-6 col-sm-12">
-        
-            <div class="padding-top-3x hidden-md-up"></div>
-            <h3 class="margin-bottom-1x">No Account? Register</h3>
-            <p>Registration takes less than a minute but gives you full control over your orders.</p>
-            
-            <form class="row" method="post">
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="reg-fn">First Name</label>
-                  <input class="form-control" type="text" id="reg-fn" required>
+	<div class="row justify-content-center">
+		<div class="col-xl-6 col-md-6 col-sm-12">
+				
+			<div class="padding-top-3x hidden-md-up"></div>
+			<h3 class="margin-bottom-1x">No Account? Register</h3>
+			<p>Registration takes less than a minute but gives you full control over your orders.</p>
+						
+			<form class="login-box" method="post">
+
+				<div class="row justify-content-center">
+                    <div class="col-xl-6 col-md-6 col-sm-6">
+                        <a class="btn btn-sm btn-block google-btn" (click)="signInWithGoogle()">
+                            <i class="socicon-googleplus"></i>&nbsp;Google+ Register
+                        </a>
+                    </div>
+                    <div class="col-xl-6 col-md-6 col-sm-6">
+                        <a class="btn btn-sm btn-block facebook-btn" (click)="signInWithFB()">
+                            <i class="socicon-facebook"></i>&nbsp;Facebook Register
+                        </a>
+                    </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="reg-ln">Last Name</label>
-                  <input class="form-control" type="text" id="reg-ln" required>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="reg-email">E-mail Address</label>
-                  <input class="form-control" type="email" id="reg-email" required>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="reg-phone">Phone Number</label>
-                  <input class="form-control" type="text" id="reg-phone" required>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="reg-pass">Password</label>
-                  <input class="form-control" type="password" id="reg-pass" required>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <label for="reg-pass-confirm">Confirm Password</label>
-                  <input class="form-control" type="password" id="reg-pass-confirm" required>
-                </div>
-              </div>
-              <div class="col-12 text-center text-sm-center">
-                <button class="btn btn-primary margin-bottom-none" type="submit">Register</button>
-              </div>
-            </form>
-            
-            <div class="text-center text-sm-center padding-top-2x">
-                <a class="navi-link" routerLink="/login">Вже є аккаунт? Увійти</a>
-            </div>
                 
-        </div>
-    </div>
+                <div class="text-center text-sm-center">
+                    <h4 class="margin-bottom-1x">Or using form below</h4>
+                </div>
+                
+                <div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="reg-email">E-mail Address</label>
+							<input class="form-control" type="email" id="reg-email" name="email" [(ngModel)]="user.email" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="reg-phone">User Name</label>
+							<input class="form-control" type="text" id="reg-username" name="username" [(ngModel)]="user.username" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="reg-pass">Password</label>
+							<input class="form-control" type="password" id="reg-pass" name="password" [(ngModel)]="user.password" required>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label for="reg-pass-confirm">Confirm Password</label>
+							<input class="form-control" type="password" id="reg-pass-confirm" name="confirmPass" [(ngModel)]="user.confirmPass" required>
+						</div>
+					</div>
+					<div class="col-12 text-center text-sm-center">
+						<button 
+						class="btn btn-primary margin-bottom-none" 
+						type="submit" 
+						(click)="signUp(user)"
+						[disabled]="!user.email || !user.username || !user.password || !user.confirmPass"
+						>Register</button>
+					</div>
+				</div>
+			</form>
+						
+			<div class="text-center text-sm-center padding-top-2x">
+				<a class="navi-link" routerLink="/login">Вже є аккаунт? Увійти</a>
+			</div>
+								
+		</div>
+	</div>
 </div>

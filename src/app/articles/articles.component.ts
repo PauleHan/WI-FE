@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Article } from './article.model';
+// import { Article } from './article.model';
 import { ArticlesService } from './articles.service';
+
+import { environment } from '../../environments/environment';
 
 @Component({
 	selector: 'app-articles',
@@ -10,7 +12,9 @@ import { ArticlesService } from './articles.service';
 
 export class ArticlesComponent implements OnInit {
 	
-	articles: Article[] = [];
+	// articles: Article[] = [];
+	public articles: any;
+	public urlApi: string = environment.api;
 	
 	constructor(private articlesService: ArticlesService) {}
 	
@@ -19,10 +23,10 @@ export class ArticlesComponent implements OnInit {
 		.articlesService
 		.getArticles()
 		.subscribe(
-			(data: Article[]) => {
+			(data: any) => {
+				// console.log(data)
 				this.articles = data;
 			},
-			// (res) => console.log(res),
 			(error) => console.log(error)
 		);
 	}

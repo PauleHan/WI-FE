@@ -2,34 +2,44 @@
 	<div class="inner">
 		<div class="tools">
 		
-			<div class="search">
-				<a routerLink="/search/q"></a><i class="icon-search"></i>
-			</div>
+			<!--<div class="search">
+				<a (click) = "onSearch()"></a><i class="icon-search"></i>
+			</div>-->
 			
 			<div class="account">
 			
-				<a routerLink="login"></a><i class="icon-head"></i>
-			
-				<ul class="toolbar-dropdown">
+				<a *ngIf="loggedIn" routerLink="user"></a>
+				<a *ngIf="!loggedIn" routerLink="login"></a>
+				<i class="icon-head"></i>
 				
-					<li class="sub-menu-user">
-					  <div class="user-ava"><img src="assets/img/account/Roman_Yakovlev.webp" alt="Роман Яковлєв">
-					  </div>
-					  <div class="user-info">
-						<h6 class="user-name">Роман Яковлєв</h6><span class="text-xs text-muted">8 рослідувань</span>
-					  </div>
-					</li>
+				<ng-template [ngIf]="loggedIn">
+					<ul class="toolbar-dropdown">
+					
+						<li class="sub-menu-user">
+							<div class="user-ava">
+								<img src="{{ photoUrl }}" alt="{{ userName }}">
+							</div>
+							<div class="user-info">
+								<h6 class="user-name">{{ (user)?.name }}</h6>
+								<span class="text-xs text-muted"></span>
+							</div>
+						</li>
+					
+						<li><a routerLink="user">Мій профіль</a></li>
+						<li><a routerLink="user">Публікації</a></li>
+						<li><a routerLink="user">Коментарі</a></li>
+						<li class="sub-menu-separator"></li>
+						<li><a (click) = "signOut()"><i class="icon-unlock"></i>Вихід</a></li>
+					</ul>
+				</ng-template>
 				
-					<li><a href="#">Мій профіль</a></li>
-					<li><a href="#">Рослідування</a></li>
-					<li class="sub-menu-separator"></li>
-					<li><a href="#"> <i class="icon-unlock"></i>Вихід</a></li>
-				
-				</ul>
 			</div>
 			
 			<div class="cart">
-				<a routerLink="long-grid-add"></a><i class="icon-plus"></i>
+				<a *ngIf="loggedIn" routerLink="long-grid-add"></a>
+				<i class="icon-plus"></i> Крауд
+				<a *ngIf="!loggedIn" routerLink="login"></a>
+				
 			</div>
 		
 		</div>

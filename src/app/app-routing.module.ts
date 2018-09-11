@@ -5,11 +5,18 @@ import { AppComponent } from './app.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleDescComponent } from './articles/article-desc/article-desc.component';
 import { ArticleAddComponent } from './articles/article-add/article-add.component';
+import { CrowdAddComponent } from './articles/crowd-add/crowd-add.component';
 import { ArticleEditComponent } from './articles/article-edit/article-edit.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { RecoveryComponent } from './user/recovery/recovery.component';
+import { CabinetComponent } from './user/cabinet/cabinet.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { FaqComponent } from './pages/faq/faq.component';
+
+import { AuthGuardService } from './user/auth-guard.service';
 
 const routes: Routes = [
     {
@@ -25,16 +32,40 @@ const routes: Routes = [
         component: ArticleAddComponent
     },
     {
-        path: 'long-grid/edit/:id',
+        path: 'crowd-add',
+        component: CrowdAddComponent
+    },
+    {
+        path: 'long-grid-edit/:id',
         component: ArticleEditComponent
     },
     {
         path: 'login',
-        component: SignInComponent
+        component: SignInComponent,
+        canActivate: [AuthGuardService]
     },
     {
         path: 'registration',
-        component: SignUpComponent
+        component: SignUpComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'recovery',
+        component: RecoveryComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'user',
+        component: CabinetComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'faq',
+        component: FaqComponent
+    },
+    {
+        path: 'welcome',
+        component: WelcomeComponent
     },
     {
         component: SearchResultsComponent,

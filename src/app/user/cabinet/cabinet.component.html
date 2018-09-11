@@ -1,0 +1,117 @@
+<div class="container padding-bottom-3x padding-top-3x mb-2">
+	<div class="row">
+		
+		<div class="col-lg-4">
+			<aside class="user-info-wrapper">
+			  <div class="user-cover" style="background-image: url(assets/img/account/user-cover-img.jpg);">
+				<div class="info-label" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward Points to spend">
+					<i class="icon-medal"></i>3.000 WCOIN | 3.000000 VESTS</div>
+			  </div>
+			  <div class="user-info">
+				<div class="user-avatar"><a class="edit-avatar" href="#"></a><img src="{{ photoUrl }}" alt="{{ (user)?.name }}"></div>
+				<div class="user-data">
+				  <h4>{{ (user)?.name }}</h4>
+				  <!--<span>На ресурсі з 16 липня 2018</span>-->
+				</div>
+			  </div>
+			</aside>
+			<nav class="list-group">
+				<a class="list-group-item active" routerLink="user">
+					<i class="icon-head"></i>Профіль
+				</a>
+				<a class="list-group-item with-badge" routerLink="user">
+					<i class="icon-bag"></i>Публікації<span class="badge badge-primary badge-pill">{{ countArticle }}</span>
+				</a>
+				<a class="list-group-item with-badge" routerLink="user">
+					<i class="icon-bag"></i>Коментарі<span class="badge badge-primary badge-pill">{{ countComment }}</span>
+				</a>
+			</nav>
+		</div>
+		
+		<div class="col-lg-8">
+			<div class="padding-top-2x mt-2 hidden-lg-up"></div>
+				<form class="row">
+				  <!--<div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-fn">Ім'я</label>
+					  <input class="form-control" type="text" id="account-fn" value="{{ (user)?.firstName }}" required="">
+					</div>
+				  </div>
+				  <div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-ln">Прізвище</label>
+					  <input class="form-control" type="text" id="account-ln" value="{{ (user)?.lastName }}" required="">
+					</div>
+				  </div>-->
+				  <div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-email">E-mail адреса</label>
+					  <input class="form-control" type="email" id="account-email" value="{{ (user)?.email }}" disabled="">
+					</div>
+				  </div>
+				  <!--<div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-phone">Телефон</label>
+					  <input class="form-control" type="text" id="account-phone" value="" required="">
+					</div>
+				  </div>-->
+				  <div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-phone">Логін</label>
+					  <input class="form-control" type="text" id="account-username" value="{{ (user)?.name }}" disabled="">
+					</div>
+				  </div>
+				  <div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-pass">Новий пароль</label>
+					  <input class="form-control" type="password" id="account-pass">
+					</div>
+				  </div>
+				  <div class="col-md-6">
+					<div class="form-group">
+					  <label for="account-confirm-pass">Ще раз пароль</label>
+					  <input class="form-control" type="password" id="account-confirm-pass">
+					</div>
+				  </div>
+				  
+				  	<div class="col-12">
+						<hr class="mt-2 mb-3">
+						<div class="form-group">
+						  <label for="account-key-memo">Key Memo</label>
+						  <input class="form-control" type="text" id="account-key-memo" value="{{ (user)?.keyMemo }}" disabled="">
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+						  <label for="account-key-active">Key Active</label>
+						  <input class="form-control" type="text" id="account-key-active" value="{{ (user)?.keyActive }}" disabled="">
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+						  <label for="account-key-owner">Key Owner</label>
+						  <input class="form-control" type="text" id="account-key-owner" value="" disabled="">
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="form-group">
+						  <label for="account-key-posting">Key Posting</label>
+						  <input class="form-control" type="text" id="account-key-posting" value="" disabled="">
+						</div>
+					</div>
+				  
+				  <div class="col-12">
+					<hr class="mt-2 mb-3">
+					<div class="d-flex flex-wrap justify-content-between align-items-center">
+					  <div class="custom-control custom-checkbox d-block">
+						<input class="custom-control-input" type="checkbox" id="subscribe_me" checked="">
+						<label class="custom-control-label" for="subscribe_me">Subscribe me to Newsletter</label>
+					  </div>
+					  <button class="btn btn-primary margin-right-none" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="icon-circle-check" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+					</div>
+				  </div>
+				</form>
+		</div>
+
+	</div>
+</div>

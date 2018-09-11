@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable()
 export class ArticleService {
 
@@ -8,7 +10,31 @@ export class ArticleService {
 
     getArticle(author: string, permlink: string) {
     	
-        const url = 'https://wiki-investigation-paulehan.c9users.io:8081/api';
-        return this.http.get(`${url}/article/${author}/${permlink}`);
-    } 
+        return this.http.get(`${environment.api}/articles/${permlink}`);
+    }
+    
+    setArticle(data: any) {
+    	
+    }
+    
+    getComments(articleId: string) {
+    	
+    	return this.http.get(`${environment.api}/comments?articles=${articleId}`);
+    }
+    
+    setComment(data: any) {
+    	
+    	return this.http.post(`${environment.api}/comments`, data);
+    }
+    
+    putLikesComment(idComment: string, data: any) {
+    	
+    	return this.http.put(`${environment.api}/comments/${idComment}`, data);
+    }
+    
+    putLikesArticle(idArticle: string, data: any) {
+    	
+    	return this.http.put(`${environment.api}/articles/${idArticle}`, data);
+    }
+    
 }

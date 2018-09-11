@@ -1,3 +1,16 @@
-<app-navbar></app-navbar>
+<!-- Off-Canvas Category Menu-->
+<app-offcanvas 
+    [сategoriesStatus] = "isCategoriesActive"
+    [menuStatus] = "isMenuActive"
+    ></app-offcanvas>
 
-<app-toolbar></app-toolbar>
+<header class="navbar navbar-sticky">
+    <app-navbar 
+        (сategoriesStatus) = "setCategoriesStatus($event)"
+        (menuStatus) = "setMenuStatus($event)"
+        [searchStatus] = "isSearchActive"
+        ></app-navbar>
+    <app-toolbar
+        (searchStatus) = "setSearchStatus($event)"
+        ></app-toolbar>
+</header>

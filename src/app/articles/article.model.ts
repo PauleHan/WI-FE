@@ -1,5 +1,10 @@
-export class Article {
-    
+export class Tags {
+    constructor(
+        public tag: string
+    ) {}
+}
+
+export class Article {  
     constructor(
         public id: number, 
         public author: string, 
@@ -8,7 +13,7 @@ export class Article {
         public last_update: string, 
         public title: string, 
         public body: string, 
-        public tags: any[], 
+        public tags: Tags[], 
         public image: string
     ) {}
 }

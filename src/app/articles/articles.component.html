@@ -4,31 +4,36 @@
         <!-- Blog Posts-->
         <div class="col-xl-9 col-lg-8 order-lg-2">
                 
-            <article class="row" *ngFor="let article of articles">   
+            <article class="row" *ngFor="let article of articles"> 
+            
                 <div class="col-md-3 order-md-2">
                   <ul class="post-meta">
-                    <li><i class="icon-clock"></i><a href="#">&nbsp;{{ article.last_update }}</a></li>
-                    <li><i class="icon-head"></i>&nbsp;{{ article.author }}</li>
+                    <li><i class="icon-clock"></i><a href="#">&nbsp;{{ article.updatedAt | date:"d-LLL-yyyy HH:mm"}}</a></li>
+                    <li><i class="icon-head"></i>&nbsp;{{ article.user[0] ? article.user[0].username : 'Анонім' }}</li>
                     <li><i class="icon-tag"></i>
-                        <a href="#" *ngFor="let tag of article.tags">&nbsp;{{ tag }}</a>
+                        <a *ngFor="let tag of article.tags" href="#{{ tag }}">&nbsp;{{ tag }}</a>
                     </li>
-                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;0 Comments</a></li>
+                    <li><i class="icon-speech-bubble"></i><a href="#">&nbsp;0 Коментарів</a></li>
+                    <li><i class="pe-7s-like2"></i>&nbsp;0</li>
                   </ul>
                 </div>
                 <div class="col-md-9 order-md-1 blog-post">
                 <h3 class="post-title">
-                    <a routerLink="{{ article.permlink }}">{{ article.title }}</a>
+                    <a routerLink="long-grid/{{ article.user[0] ? article.user[0].username : 'anonymous' }}/{{ article.id }}">{{ article.title }}</a>
                 </h3>
-                    <a class="post-thumb" routerLink="{{ article.permlink }}">
-                        <img [src]="article.image" alt="{{ article.title }}">
+                    <a *ngIf="article.media !== null" class="post-thumb" routerLink="long-grid/{{ article.user[0] ? article.user[0].username : 'anonymous' }}/{{ article.id }}">
+                        <img src="{{ urlApi }}{{ article.media.url }}" alt="{{ article.title }}">
                     </a>  
-                    <p>{{ article.body }}&nbsp;<a routerLink="{{ article.permlink }}" class='text-medium'>Read More</a>
+                    <a *ngIf="article.crowd === true" class="post-thumb" routerLink="long-grid/{{ article.user[0] ? article.user[0].username : 'anonymous' }}/{{ article.id }}">
+                        <img src="/assets/img/blog/crowd.jpg" alt="{{ article.title }}">
+                    </a>
+                    <p>{{ article.preview }}&nbsp;<a routerLink="long-grid/{{ article.user[0] ? article.user[0].username : 'anonymous' }}/{{ article.id }}" class='text-medium'>Читати далі</a>
                     </p>
                 </div>
             </article>
             
             <!-- Pagination-->
-            <nav class="pagination">
+            <!--<nav class="pagination">
                 <div class="column">
                     <ul class="pages">
                         <li class="active"><a href="#">1</a></li>
@@ -42,7 +47,7 @@
                 <div class="column text-right hidden-xs-down">
                     <a class="btn btn-outline-secondary btn-sm" href="#">Next&nbsp;<i class="icon-arrow-right"></i></a>
                 </div>
-            </nav>
+            </nav>-->
         </div>
         
         <!-- Sidebar-->

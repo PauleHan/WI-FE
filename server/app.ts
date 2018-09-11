@@ -2,6 +2,7 @@ import { json, urlencoded } from "body-parser";
 import * as compression from "compression";
 import * as express from "express";
 import * as path from "path";
+import * as favicon from "serve-favicon";
 import * as cors from "cors";
 
 import { articleRouter } from "./routes/article";
@@ -15,12 +16,30 @@ const app: express.Application = express();
 app.disable("x-powered-by");
 
 app.use(cors());
-app.options('*', cors()); // include before other routes
+// const whitelist = ['https://wiki-investigation-paulehan.c9users.io/'];
+const whitelist = ['*'];
+
+const corsOptions = {
+	'origin': function(origin, callback) {
+		if (whitelist.indexOf(origin) !== -1) {
+			callback(null, true)
+		}
+		else {
+			callback(new Error('Not allowed by CORS'))
+		}
+	},
+	'preflightContinue':	false,
+	'methods':				['GET', 'POST'],
+	'credentials':			true
+}
 
 app.use(json());
 app.use(compression());
 app.use(urlencoded({ extended: true }));
 
+app.use(favicon(path.join(__dirname + '/static/favicon.ico')));
+
+app.options('*', cors(corsOptions));
 // api routes
 app.use("/api/article", articleRouter);
 app.use("/api/articles", articlesRouter);
@@ -35,8 +54,8 @@ app.use("/api", indexRouter);
 
 if (app.get("env") === "production") {
 
-// in production mode run application from dist folder
-app.use(express.static(path.join(__dirname, "/../wiki-fe")));
+	// in production mode run application from dist folder
+	app.use(express.static(path.join(__dirname, "/../wiki-fe")));
 }
 
 // catch 404 and forward to error handler
