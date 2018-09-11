@@ -4,14 +4,14 @@
 
 export const environment = {
     production: false,
-    googleClientID: '749889717664-uaii9eto0iqda9fqr9e7p9c8sfcsd7ql.apps.googleusercontent.com',
-    googleClientSecret: '4zp-0aRX05ZAIjwVSoV4aoQe',
-    facebookClientID: '2309349789285282',
-    facebookClientSecret: '6e25e411ab5cbc8f3783bc3ec2597ab6',
-    api: 'https://wiki-investigation-paulehan.c9users.io:8082',
-    host: 'https://wiki-investigation-paulehan.c9users.io',
-    bcWallet: 'https://159.89.101.56:8094',
-    bcSteemd: 'https://159.89.101.56:9877'
+    googleClientID: process.env.GOOGLE_CLIENT_ID,
+    googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    facebookClientID: process.env.FACEBOOK_CLIENT_ID,
+    facebookClientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    api: process.env.API,
+    host: process.env.HOST,
+    bcWallet: process.env.BC_WALLET,
+    bcSteemd: process.env.BC_STEEMD
 };
 
 /*
